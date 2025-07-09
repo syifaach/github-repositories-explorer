@@ -1,3 +1,7 @@
+# Github Repository Explorer
+This apps is about showing the repository of searched user based on input value which trigerred by a button.
+Use npm run dev command to use this application.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
