@@ -1,20 +1,22 @@
 import Accordion from '../../../components/Accordion'
 import { RepositoryDetailProps } from '../../../constants/interfaces/repositories'
 
-const RepositoryDetail = ({ data }: RepositoryDetailProps) => {
+const RepositoryDetail = ({ data, detailData, onClick }: RepositoryDetailProps) => {
     const Detail = ({ data }) => {
         return (
             <>
-                <div className='ms-2'>
-                    <div className='d-flex justify-content-between align-items-center fw-bold'>
-                        <h5>{data?.repoTitle}</h5>
-                        <h5>{data?.rating} ⭐</h5>
-                    </div>
+                {data?.map((val: any, idx: number) => (
+                    <div key={idx} className='ms-2'>
+                        <div className='d-flex justify-content-between align-items-center fw-bold'>
+                            <h5>{val?.repoTitle}</h5>
+                            <h5>{val?.rating} ⭐</h5>
+                        </div>
 
-                    <div>
-                        <label>{data?.repoContent}</label>
+                        <div>
+                            <label>{val?.repoDescription}</label>
+                        </div>
                     </div>
-                </div>
+                ))}
             </>
         )
     }
@@ -27,8 +29,9 @@ const RepositoryDetail = ({ data }: RepositoryDetailProps) => {
                         <Accordion
                             key={idx}
                             id={idx}
-                            header={val.username}
-                            body={<Detail data={val} />}
+                            header={val.login}
+                            onClick={onClick}
+                            body={<Detail data={detailData} />}
                         />
                     ))}
             </div>

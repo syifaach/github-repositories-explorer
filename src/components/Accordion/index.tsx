@@ -1,6 +1,25 @@
+import { useEffect, useRef } from 'react'
 import { AccordionProps } from './constants'
 
-const Accordion = ({ id, header, body }: AccordionProps) => {
+const Accordion = ({ id, header, body, onClick }: AccordionProps) => {
+  const collapseRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const collapseEl = collapseRef.current
+    if (!collapseEl) return
+
+    const handleShown = () => {
+      console.log(`Accordion ${id} is now EXPANDED`)
+      onClick?.(header)
+    }
+
+    collapseEl.addEventListener('shown.bs.collapse', handleShown)
+
+    return () => {
+      collapseEl.removeEventListener('shown.bs.collapse', handleShown)
+    }
+  }, [id])
+
   return (
     <>
       <div className='mb-2'>
@@ -19,6 +38,7 @@ const Accordion = ({ id, header, body }: AccordionProps) => {
           </h2>
 
           <div
+            ref={collapseRef}
             id={`collapse${id}`}
             className='accordion-collapse collapse'
             data-bs-parent='#accordionExample'
