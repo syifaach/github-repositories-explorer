@@ -1,3 +1,3 @@
-# github-repositories-explorer
+# Github Repository Explorer
 
-Try npm run dev to running this project
+The main source code was on master branch. Please kind a look on master branch to view the source code and run the project.
