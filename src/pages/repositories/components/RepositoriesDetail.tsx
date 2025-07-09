@@ -29,8 +29,6 @@ const RepositoryDetail = ({ data, detailData, isLoading, onClick }: RepositoryDe
         )
     }
 
-    console.log('loading', isLoading)
-
     return (
         <>
             <div className='accordion' id='accordionExample'>

@@ -9,7 +9,6 @@ const Accordion = ({ id, header, body, onClick }: AccordionProps) => {
     if (!collapseEl) return
 
     const handleShown = () => {
-      console.log(`Accordion ${id} is now EXPANDED`)
       onClick?.(header)
     }
 

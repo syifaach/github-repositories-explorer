@@ -69,9 +69,6 @@ const RepositoryPage = () => {
         }
     }
 
-    console.log('username', username)
-    console.log('data', repoData, 'userData', userData)
-
     return (
         <>
             <div
