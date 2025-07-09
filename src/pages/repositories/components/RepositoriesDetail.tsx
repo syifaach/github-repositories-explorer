@@ -2,11 +2,16 @@ import Accordion from '../../../components/Accordion'
 import Card from '../../../components/Card'
 import { RepositoryDetailProps } from '../../../constants/interfaces/repositories'
 
-const RepositoryDetail = ({ data, detailData, onClick }: RepositoryDetailProps) => {
+const RepositoryDetail = ({ data, detailData, isLoading, onClick }: RepositoryDetailProps) => {
     const Detail = ({ data }) => {
         return (
             <>
-                {data?.map((val: any, idx: number) => (
+                {isLoading &&
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                }
+                {!isLoading && data?.map((val: any, idx: number) => (
                     <Card cardClass='p-1 mb-2' cardContent={
                         <div key={idx} className='ms-2'>
                             <div className='d-flex justify-content-between align-items-center fw-bold'>
@@ -23,6 +28,8 @@ const RepositoryDetail = ({ data, detailData, onClick }: RepositoryDetailProps) 
             </>
         )
     }
+
+    console.log('loading', isLoading)
 
     return (
         <>

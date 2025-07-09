@@ -1,6 +1,7 @@
 export interface RepositoryDetailProps {
     data?: any,
     detailData?: any,
+    isLoading?: boolean,
     onClick?(params?: any): void
 }
 

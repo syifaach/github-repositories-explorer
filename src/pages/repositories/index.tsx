@@ -37,28 +37,36 @@ const RepositoryPage = () => {
     }
 
     const getRepoData = async (username: string) => {
-        await fetch(`https://api.github.com/users/${username}/repos`)
-            .then((res: any) => res.json())
-            .then((data) => {
-                if (data) {
-                    let res: RepoDetailData[] = []
-                    for (let i = 0; i < data?.length; i++) {
-                        const dataObj = {
-                            username: data[i]?.owner?.login,
-                            repoTitle: data[i]?.name,
-                            repoDescription: data[i]?.description,
-                            rating: data[i]?.stargazers_count
+        setIsLoading(true)
+        
+        try {
+            await fetch(`https://api.github.com/users/${username}/repos`)
+                .then((res: any) => res.json())
+                .then((data) => {
+                    if (data) {
+                        let res: RepoDetailData[] = []
+                        for (let i = 0; i < data?.length; i++) {
+                            const dataObj = {
+                                username: data[i]?.owner?.login,
+                                repoTitle: data[i]?.name,
+                                repoDescription: data[i]?.description,
+                                rating: data[i]?.stargazers_count
+                            }
+    
+                            res.push(dataObj)
                         }
-
-                        res.push(dataObj)
+    
+                        setRepoData(res)
+                    } else {
+                        setRepoData([])
                     }
-
-                    setRepoData(res)
-                } else {
-                    setRepoData([])
-                }
-            })
-            .catch(error => console.error('Error:', error));
+                })
+                .catch(error => console.error('Error:', error));
+        } catch (err) {
+            console.error('Err', err)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     console.log('username', username)
@@ -86,7 +94,7 @@ const RepositoryPage = () => {
                 {isSearch && (
                     <div className='mt-2'>
                         <label>Showing users for "Exampleuser1"</label>
-                        <RepositoryDetail data={userData} detailData={repoData} onClick={onClickDetail} />
+                        <RepositoryDetail data={userData} detailData={repoData} isLoading={isLoading} onClick={onClickDetail} />
                     </div>
                 )}
             </div>
